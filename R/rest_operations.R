@@ -40,8 +40,8 @@ rest_store_yearly_unemployment_data <- function() {
   dbWriteTable(conn = con,
                name = "toy_tables",
                value = yearAverages,
-               overwrite=FALSE,
-               append=TRUE)  ## x is any data frame
+               overwrite=TRUE,
+               append=FALSE)  ## x is any data frame
 
   # TODO return calculated data as response
   dbReadTable(con, "toy_tables")
@@ -62,4 +62,19 @@ rest_store_yearly_unemployment_data()
 rest_get_yearly_unemployment_data <- function(from, to) {
   # TODO reading data from database based on criteria of from/to
 
+  library(dplyr)
+  filter_date_from <- as.POSIXct(from, tz = "UTC")
+  filter_date_to <- as.POSIXct(to, tz = "UTC")
+
+  filteredData <- tbl(con, "toy_tables") %>%
+    filter(Date > filter_date_from) %>%
+    filter(Date < filter_date_to)
+
+  print(filteredData, n = 1000)
+
 }
+
+rest_get_yearly_unemployment_data("2000-01-23", "2019-01-23")
+
+
+
