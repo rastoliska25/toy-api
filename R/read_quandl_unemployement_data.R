@@ -8,12 +8,14 @@
 #'
 #'apikey: ooxzxpTkpnGzBM6j9KWx
 #'
-library(magrittr)
 read_quandl_unemployement_data <- function(){
+
+  library(magrittr)
+
   logging::loginfo("Start reading Quandl data.")
 
   tryCatchLog::tryCatchLog({
-    res <- Quandl::Quandl("FRED/NROUST") %>% data.table::as.data.table()
+    res <- Quandl::Quandl("FRED/NROUST", api_key='ooxzxpTkpnGzBM6j9KWx') %>% data.table::as.data.table()
 
     res[, Date := lubridate::ymd(Date)]
   },
