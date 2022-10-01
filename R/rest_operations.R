@@ -8,16 +8,23 @@
 rest_store_yearly_unemployment_data <- function(){
 
   # reading data, use toyAPI::read_quandl_unemployement_data()
+  read_quandl_unemployement_data()
 
   # TODO averaging by year
+  res$Date <- as.Date(res$Date)   #convert to date
+  res$Year <- format(res$Date,format="%Y")    #years
+
+  aggregate(res[, 2], list(res$Year), mean)   #average values by year
+
 
   # TODO store data in DB, where Date is primary key and Value numeric
 
   # TODO return calculated data as response
 
-}
 
-read_quandl_unemployement_data()
+
+
+}
 
 
 

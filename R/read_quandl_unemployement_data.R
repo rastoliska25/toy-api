@@ -6,7 +6,6 @@
 #' @examples
 #' \donotrun{read_quandl_unemployement_data()}
 #'
-#'apikey: ooxzxpTkpnGzBM6j9KWx
 #'
 read_quandl_unemployement_data <- function(){
 
