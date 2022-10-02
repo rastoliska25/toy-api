@@ -9,7 +9,7 @@ test_that("Store yearly unemployment data test, success", {
   for (i in 1:nrow(yearAverages)) {
     test_date <- T
 
-    datas <- yearAverages[i, ]
+    datas <- yearAverages[i,]
     date <- datas$Date
 
     if (!(is.right_date_format(date))) {
@@ -25,7 +25,7 @@ test_that("Store yearly unemployment data test, success", {
   for (i in 1:nrow(yearAverages)) {
     test_value <- T
 
-    datas <- yearAverages[i,]
+    datas <- yearAverages[i, ]
     value <- datas$Value
 
     if (!(length(value) > 0 & is.numeric(value))) {
@@ -40,10 +40,8 @@ test_that("Store yearly unemployment data test, success", {
 
 test_that("Get yearly unemplyment data test, success", {
   # TODO create test, which check whether data are loaded in required format
-  data_mysql <-
+  dataframe_from_mysql <-
     rest_get_yearly_unemployment_data("2000-01-23", "2019-01-23")
-
-  dataframe_from_mysql <- as.data.frame(data_mysql)
 
   #Dates to load format test
   is.right_date_format <- function(x)
@@ -52,7 +50,7 @@ test_that("Get yearly unemplyment data test, success", {
   for (i in 1:nrow(dataframe_from_mysql)) {
     test_date <- T
 
-    datas <- dataframe_from_mysql[i, ]
+    datas <- dataframe_from_mysql[i,]
     date <- datas$Date
 
     if (!(is.right_date_format(date))) {
@@ -67,7 +65,7 @@ test_that("Get yearly unemplyment data test, success", {
   for (i in 1:nrow(dataframe_from_mysql)) {
     test_value <- T
 
-    datas <- dataframe_from_mysql[i,]
+    datas <- dataframe_from_mysql[i, ]
     value <- datas$Value
 
     if (!(length(value) > 0 & is.numeric(value))) {
@@ -85,20 +83,26 @@ test_that("Get yearly unemplyment data test, success", {
             as.POSIXct("1999-01-23 01:01:01"))
 
   # correctness of data(Average values)
-  specify_decimal <- function(x, k) trimws(format(round(x, k), nsmall=k)) #decimals rounding function
+  specify_decimal <-
+    function(x, k)
+      trimws(format(round(x, k), nsmall = k)) #decimals rounding function
 
   #2005 average value data correction test
   values_2005 <- c(4.996717, 5.003654, 5.011637, 5.020076)
   average_value_2005 <-
-    subset(dataframe_from_mysql, Date >= "2004-10-01" & Date <= "2005-10-01")
+    subset(dataframe_from_mysql,
+           Date >= "2004-10-01" & Date <= "2005-10-01")
 
-  expect_equal(specify_decimal(average_value_2005$Value, 6), specify_decimal(mean(values_2005), 6))
+  expect_equal(specify_decimal(average_value_2005$Value, 6),
+               specify_decimal(mean(values_2005), 6))
 
   #2015 average value data correction test
   values_2015 <- c(4.731372, 4.756195, 4.782687, 4.810394)
   average_value_2015 <-
-    subset(dataframe_from_mysql, Date >= "2014-10-01" & Date <= "2015-10-01")
+    subset(dataframe_from_mysql,
+           Date >= "2014-10-01" & Date <= "2015-10-01")
 
-  expect_equal(specify_decimal(average_value_2015$Value, 6), specify_decimal(mean(values_2015), 6))
+  expect_equal(specify_decimal(average_value_2015$Value, 6),
+               specify_decimal(mean(values_2015), 6))
 
 })
