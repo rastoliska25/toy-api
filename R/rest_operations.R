@@ -23,6 +23,7 @@ rest_store_yearly_unemployment_data <- function() {
   yearAverages[['Date']] <- as.POSIXct(yearAverages[['Date']],  #format to date
                                        format = "%Y-%m-%d %H:%M:%S")
 
+  yearAverages <<- yearAverages
   # TODO store data in DB, where Date is primary key and Value numeric
   library(DBI)
   con <-
