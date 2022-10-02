@@ -1,7 +1,6 @@
 test_that("Test of reading Quandl, success", {
   # TODO test of reading Quandl data are in required format
   read_quandl_unemployement_data()
-  print(res)
 
   #Dates format test
   is.right_date_format <- function(x)
@@ -37,12 +36,6 @@ test_that("Test of reading Quandl, success", {
   expect_true(test_value, T)
 
 })
-
-
-
-
-
-
 
 
 # httptest::without_internet({

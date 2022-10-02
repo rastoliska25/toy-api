@@ -1,5 +1,7 @@
 
 
+
+
 #' Main Operation of POST storing yearly unemployment data REST service
 #'
 #' @return
@@ -20,8 +22,9 @@ rest_store_yearly_unemployment_data <- function() {
 
   colnames(yearAverages)[1] <- "Date"   #change first column name
 
-  yearAverages[['Date']] <- as.POSIXct(yearAverages[['Date']],  #format to date
-                                       format = "%Y-%m-%d %H:%M:%S")
+  yearAverages[['Date']] <-
+    as.POSIXct(yearAverages[['Date']],  #format to date
+               format = "%Y-%m-%d %H:%M:%S")
 
   yearAverages <<- yearAverages
   # TODO store data in DB, where Date is primary key and Value numeric
@@ -37,14 +40,16 @@ rest_store_yearly_unemployment_data <- function() {
       Port = 3306
     )
 
-  con<<-con
+  con <<- con
 
   # create table and insert data
-  dbWriteTable(conn = con,
-               name = "toy_tables",
-               value = yearAverages,
-               overwrite=TRUE,
-               append=FALSE)
+  dbWriteTable(
+    conn = con,
+    name = "toy_tables",
+    value = yearAverages,
+    overwrite = TRUE,
+    append = FALSE
+  )
 
   # TODO return calculated data as response
   dbReadTable(con, "toy_tables")
@@ -73,18 +78,4 @@ rest_get_yearly_unemployment_data <- function(from, to) {
     filter(Date > filter_date_from) %>%
     filter(Date < filter_date_to)
 
-  print(filteredData, n = 1000)
-
 }
-
-rest_get_yearly_unemployment_data("2000-01-23", "2019-01-23")
-
-
-
-
-
-
-
-
-
-
