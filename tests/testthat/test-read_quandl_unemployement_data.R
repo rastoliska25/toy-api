@@ -6,8 +6,8 @@ test_that("Test of reading Quandl, success", {
   is.right_date_format <- function(x)
     ! is.na(as.Date(x, "%Y-%m-%d"))
 
+  test_date <- T
   for (i in 1:nrow(res)) {
-    test_date <- T
 
     datas <- res[i,]
     date <- datas$Date
@@ -21,8 +21,8 @@ test_that("Test of reading Quandl, success", {
   expect_true(test_date, T)
 
   # Values format test
+  test_value <- T
   for (i in 1:nrow(res)) {
-    test_value <- T
 
     datas <- res[i,]
     value <- datas$Value
