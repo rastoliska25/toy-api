@@ -1,12 +1,40 @@
 test_that("Test of reading Quandl, success", {
   # TODO test of reading Quandl data are in required format
   read_quandl_unemployement_data()
+  print(res)
 
-  expect_equal(2*2,4)
+  #Dates format test
+  is.right_date_format <- function(x)
+    ! is.na(as.Date(x, "%Y-%m-%d"))
 
-  is.ymd_hms2 <- function(x) !is.na(as.Date(x, "%Y-%m-%d %H:%M:%S"))
+  for (i in 1:nrow(res)) {
+    test_date <- T
 
-  is.ymd_hms2("2020-0101 22:22:22")
+    datas <- res[i,]
+    date <- datas$Date
+
+    if (!(is.right_date_format(date))) {
+      test_date <- F
+    }
+
+  }
+
+  expect_true(test_date, T)
+
+  # Values format test
+  for (i in 1:nrow(res)) {
+    test_value <- T
+
+    datas <- res[i,]
+    value <- datas$Value
+
+    if (!(length(value) > 0 & is.numeric(value))) {
+      test_value <- F
+
+    }
+  }
+
+  expect_true(test_value, T)
 
 })
 
