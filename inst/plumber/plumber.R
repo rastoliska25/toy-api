@@ -17,15 +17,13 @@ function(req) {
 }
 
 #' Get yearly average values for Unemploymenet data
-# @param from date to return data from
-# @param to date to ruturn data to
+#' @param from date to return data from
+#' @param to date to ruturn data to
 #' @get /toy-api/get-yearly-unemployment-data
-function(req) {
-  # rest_get_yearly_unemployment_data(from, to)
-  rest_get_yearly_unemployment_data("2000-01-23", "2019-01-23")
+function(req,
+         from = as.character(Sys.Date() - 365 * 4),
+         to = as.character(Sys.Date())) {
+
+  rest_get_yearly_unemployment_data(from, to)
+
 }
-
-
-
-
-
