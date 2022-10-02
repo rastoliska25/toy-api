@@ -38,9 +38,11 @@ test_that("Test of reading Quandl, success", {
 })
 
 
-# httptest::without_internet({
-#   test_that("Test of reading Quandl, fail", {
-#     # TODO test of error if Quandl service is not available
-#     read_quandl_unemployement_data()
-#   })
-# })
+httptest::without_internet({
+  test_that("Test of reading Quandl, fail", {
+    # TODO test of error if Quandl service is not available
+
+    expect_error(read_quandl_unemployement_data())
+
+  })
+})

@@ -4,7 +4,7 @@ test_that("Store yearly unemployment data test, success", {
 
   #Dates to store format test
   is.right_date_format <- function(x)
-    ! is.na(as.Date(x, fromat = "%Y-%m-%d %H:%M:%S"))
+    ! is.na(as.Date(x, format = "%Y-%m-%d %H:%M:%S"))
 
   test_date <- T
   for (i in 1:nrow(yearAverages)) {
