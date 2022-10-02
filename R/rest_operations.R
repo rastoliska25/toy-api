@@ -36,12 +36,14 @@ rest_store_yearly_unemployment_data <- function() {
       Port = 3306
     )
 
+  con<<-con
+
   # create table and insert data
   dbWriteTable(conn = con,
                name = "toy_tables",
                value = yearAverages,
                overwrite=TRUE,
-               append=FALSE)  ## x is any data frame
+               append=FALSE)
 
   # TODO return calculated data as response
   dbReadTable(con, "toy_tables")
@@ -75,6 +77,13 @@ rest_get_yearly_unemployment_data <- function(from, to) {
 }
 
 rest_get_yearly_unemployment_data("2000-01-23", "2019-01-23")
+
+
+
+
+
+
+
 
 
 

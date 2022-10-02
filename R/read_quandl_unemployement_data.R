@@ -24,5 +24,5 @@ read_quandl_unemployement_data <- function(){
 
   logging::loginfo("Finished reading Quandl data.")
 
-  res
+  res<<-res
 }
