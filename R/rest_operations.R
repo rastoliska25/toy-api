@@ -1,4 +1,3 @@
-
 #' Main Operation of POST storing yearly unemployment data REST service
 #'
 #' @return
@@ -38,12 +37,12 @@ rest_store_yearly_unemployment_data <- function() {
     )
 
   # create table and insert data
-  dbGetQuery(con,"CREATE TABLE toy_tables (Date TIMESTAMP NOT NULL,Value DOUBLE NOT NULL,PRIMARY KEY(Date));")
-
-  dbAppendTable(
+  dbWriteTable(
     conn = con,
     name = "toy_tables",
-    value = yearAverages
+    value = yearAverages,
+    overwrite = TRUE,
+    append = FALSE
   )
 
   # TODO return calculated data as response
