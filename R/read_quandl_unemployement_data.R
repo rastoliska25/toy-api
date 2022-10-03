@@ -2,11 +2,8 @@
 #'
 #' @return data.frame
 #' @export
-#'
 #' @examples
 #' \donotrun{read_quandl_unemployement_data()}
-#'
-#'
 read_quandl_unemployement_data <- function() {
   library(magrittr)
 

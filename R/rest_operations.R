@@ -3,7 +3,6 @@
 #'
 #' @return
 #' @export
-#'
 #' @examples
 rest_store_yearly_unemployment_data <- function() {
   # reading data, use toyAPI::read_quandl_unemployement_data()
@@ -39,12 +38,12 @@ rest_store_yearly_unemployment_data <- function() {
     )
 
   # create table and insert data
-  dbWriteTable(
+  dbGetQuery(con,"CREATE TABLE toy_tables (Date TIMESTAMP NOT NULL,Value DOUBLE NOT NULL,PRIMARY KEY(Date));")
+
+  dbAppendTable(
     conn = con,
     name = "toy_tables",
-    value = yearAverages,
-    overwrite = TRUE,
-    append = FALSE
+    value = yearAverages
   )
 
   # TODO return calculated data as response
@@ -52,13 +51,10 @@ rest_store_yearly_unemployment_data <- function() {
 }
 
 #' Main Operation of GET yearly unemployment data REST service
-#'
 #' @param from
 #' @param to
-#'
 #' @return
 #' @export
-#'
 #' @examples
 rest_get_yearly_unemployment_data <- function(from, to) {
   # TODO reading data from database based on criteria of from/to
