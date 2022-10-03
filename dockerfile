@@ -21,4 +21,4 @@ COPY / /
 
 EXPOSE 8000
 
-ENTRYPOINT ["Rscript", "/R/run_api.R"]
+ENTRYPOINT ["Rscript", "/inst/plumber/plumber.R"]

@@ -13,3 +13,4 @@
 run_api <- function(host = '0.0.0.0', port = 8000, ...) {
   plumber::plumb(dir = system.file("plumber", package = "toyAPI"))$run(host, port, ...)
 }
+
