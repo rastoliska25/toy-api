@@ -1,5 +1,7 @@
 #' Run the housing prediction API
-#'
+library(plumber)
+options(warn=-1)
+
 #' @param host Character. Address to run API on
 #' @param port Integer. Port to run API on
 #' @param ... Options passed to \code{plumber::plumb()$run()}
@@ -10,7 +12,12 @@
 #' }
 #' @return A running Plumber API
 #' @export
-run_api <- function(host = '0.0.0.0', port = 8000, ...) {
-  plumber::plumb(dir = system.file("plumber", package = "toyAPI"))$run(host, port, ...)
-}
+#'
+#run_api <- function(host = '0.0.0.0', port = 8000, ...) {
+#  plumber::plumb(dir = system.file("plumber", package = "toyAPI"))$run(host, port, ...)
+#}
+
+
+run_api <- plumber::plumb("/inst/plumber/plumber.R")
+run_api$run(port=8000, host="0.0.0.0",swagger=TRUE)
 

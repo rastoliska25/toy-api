@@ -1,7 +1,6 @@
-FROM rocker/r-ver:4.2.0
+FROM rocker/r-ver:4.0.2
 
-RUN apt-get update -qq &&\ 
-apt-get install -y \
+RUN apt-get update -qq && apt-get install -y \
 libssl-dev \
 libcurl4-gnutls-dev \
 libxml2-dev 
@@ -15,10 +14,11 @@ RUN R -e "install.packages('tryCatchLog')"
 RUN R -e "install.packages('Quandl')"
 RUN R -e "install.packages('DBI')"
 RUN R -e "install.packages('dplyr')"
+RUN R -e "install.packages('swagger')"
 RUN R -e "install.packages('odbc')"
 
 COPY / /
 
 EXPOSE 8000
 
-ENTRYPOINT ["Rscript", "/inst/plumber/plumber.R"]
+ENTRYPOINT ["Rscript", "/R/run_api.R"]
