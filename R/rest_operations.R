@@ -37,13 +37,15 @@ rest_store_yearly_unemployment_data <- function() {
     )
 
   # create table and insert data
-  dbWriteTable(
-    conn = con,
-    name = "toy_tables",
-    value = yearAverages,
-    overwrite = TRUE,
-    append = FALSE
+  dbGetQuery(
+    con,
+    "CREATE TABLE IF NOT EXISTS toy_tables (Date DATETIME,Value DOUBLE,PRIMARY KEY(Date));"
   )
+
+  dbAppendTable(conn = con,
+                name = "toy_tables",
+                value = yearAverages
+                )
 
   # TODO return calculated data as response
   dbReadTable(con, "toy_tables")
