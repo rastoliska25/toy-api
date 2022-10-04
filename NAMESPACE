@@ -2,6 +2,8 @@
 
 export("%>%")
 export(read_quandl_unemployement_data)
+export(rest_get_yearly_unemployment_data)
+export(rest_store_yearly_unemployment_data)
 export(run_api)
 import(data.table)
 importFrom(magrittr,"%>%")

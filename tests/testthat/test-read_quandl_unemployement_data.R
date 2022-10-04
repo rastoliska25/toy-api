@@ -37,7 +37,6 @@ test_that("Test of reading Quandl, success", {
 
 })
 
-
 httptest::without_internet({
   test_that("Test of reading Quandl, fail", {
     # TODO test of error if Quandl service is not available

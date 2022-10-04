@@ -22,5 +22,6 @@ COPY / /
 
 EXPOSE 8000
 
+#CMD ["R", "-e", "toyAPI::run_api()"]
 ENTRYPOINT ["Rscript", "/R/run_api.R"]
 
