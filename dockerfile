@@ -5,7 +5,17 @@ USER root
 RUN apt-get update -qq && apt-get install -y \
 libssl-dev \
 libcurl4-gnutls-dev \
-libxml2-dev
+libxml2-dev \
+libjq-dev \
+libprotobuf-dev \
+protobuf-compiler \
+make \
+libgeos-dev \
+libudunits2-dev \
+libgdal-dev \
+gdal-bin \
+libproj-dev \
+libv8-dev
 
 RUN R -e "install.packages('plumber')"
 RUN R -e "install.packages('magrittr')"
@@ -19,20 +29,14 @@ RUN R -e "install.packages('dplyr')"
 RUN R -e "install.packages('swagger')"
 RUN R -e "install.packages('odbc')"
 RUN R -e "install.packages('devtools')"
-#RUN R -e "install.packages('tempr.tar.gz', repos = NULL, type = 'source')"
-#RUN R -e "install.packages('tempr.tar.gz', repos = 'C:/rprojects/toy-api-main', type = 'source')"
-#RUN R -e "install.packages('tempr')" 
+RUN R -e "install.packages('RMySQL')"
 
 COPY / /
 
 RUN R -e "install.packages('tempr.tar.gz', repos = NULL, type = 'source')"
 RUN R -e "install.packages('tempr')" 
 
-#RUN R CMD build .
-
 EXPOSE 8000
 
-
-#CMD ["R", "-e", "toyAPI::run_api()"]
 ENTRYPOINT ["Rscript", "/R/run_api.R"]
 

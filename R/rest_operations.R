@@ -24,7 +24,6 @@ rest_store_yearly_unemployment_data <- function() {
   yearAverages <<- yearAverages
   # TODO store data in DB, where Date is primary key and Value numeric
   library(DBI)
-  library(RMySQL)
 
   con <<-
     dbConnect(
@@ -45,8 +44,7 @@ rest_store_yearly_unemployment_data <- function() {
 
   dbAppendTable(conn = con,
                 name = "toy_tables",
-                value = yearAverages
-                )
+                value = yearAverages)
 
   # TODO return calculated data as response
   dbReadTable(con, "toy_tables")
@@ -62,6 +60,7 @@ rest_get_yearly_unemployment_data <- function(from, to) {
   # TODO reading data from database based on criteria of from/to
 
   library(DBI)
+
   con <<-
     dbConnect(
       odbc::odbc(),
@@ -69,7 +68,7 @@ rest_get_yearly_unemployment_data <- function(from, to) {
       Server = "localhost",
       Database = "shop",
       UID = "root",
-      PWD = "password",
+      PWD = "passwords",
       Port = 3306
     )
 
