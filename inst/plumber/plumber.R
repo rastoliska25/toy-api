@@ -2,8 +2,11 @@ library(plumber)
 
 #' @apiTitle Toy API example using plumber
 
-setwd("C:\\rprojects\\toy-api-main")
-source("./R/rest_operations.R", chdir = TRUE)
+
+library('tempr')
+#setwd("C:\\rprojects\\toy-api-main")
+#setwd("C:/rprojects/toy-api-main")
+#source("./R/rest_operations.R", chdir = TRUE)
 #' Check status of API
 #* @get /health-check
 function() {

@@ -24,6 +24,7 @@ rest_store_yearly_unemployment_data <- function() {
   yearAverages <<- yearAverages
   # TODO store data in DB, where Date is primary key and Value numeric
   library(DBI)
+  library(RMySQL)
 
   con <<-
     dbConnect(
