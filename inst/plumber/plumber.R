@@ -1,7 +1,7 @@
 library(plumber)
 
 #' @apiTitle Toy API example using plumber
-
+#'
 library('tempr')
 
 #' Check status of API

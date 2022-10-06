@@ -24,12 +24,13 @@ rest_store_yearly_unemployment_data <- function() {
   yearAverages <<- yearAverages
   # TODO store data in DB, where Date is primary key and Value numeric
   library(DBI)
+  library(RMySQL)
 
   con <<-
     dbConnect(
       odbc::odbc(),
       .connection_string = "Driver={MySQL ODBC 8.0 Unicode Driver};",
-      Server = "localhost",
+      Server = "127.0.0.1",
       Database = "shop",
       UID = "root",
       PWD = "password",
@@ -60,17 +61,16 @@ rest_get_yearly_unemployment_data <- function(from, to) {
   # TODO reading data from database based on criteria of from/to
 
   library(DBI)
+  library(RMySQL)
 
-  con <<-
-    dbConnect(
-      odbc::odbc(),
-      .connection_string = "Driver={MySQL ODBC 8.0 Unicode Driver};",
-      Server = "localhost",
-      Database = "shop",
-      UID = "root",
-      PWD = "passwords",
-      Port = 3306
-    )
+  con <<- dbConnect(
+    RMySQL::MySQL(),
+    dbname = 'shop',
+    host = '127.0.0.1',
+    port = 3306,
+    user = 'root',
+    password = 'password'
+  )
 
   library(dplyr)
   filter_date_from <- as.POSIXct(from, tz = "UTC")

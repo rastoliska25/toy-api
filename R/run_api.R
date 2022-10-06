@@ -15,3 +15,4 @@ run_api <- plumber::plumb("/inst/plumber/plumber.R")
 run_api$run(port = 8000,
             host = "0.0.0.0",
             swagger = TRUE)
+

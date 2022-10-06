@@ -6,6 +6,7 @@
 #' \donotrun{read_quandl_unemployement_data()}
 read_quandl_unemployement_data <- function() {
   library(magrittr)
+  library(data.table)
 
   logging::loginfo("Start reading Quandl data.")
 
