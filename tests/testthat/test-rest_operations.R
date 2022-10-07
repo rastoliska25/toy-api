@@ -77,9 +77,9 @@ test_that("Get yearly unemplyment data test, success", {
   expect_true(test_value, T)
 
   # correctness of data(Dates)
-  expect_lt(max(dataframe_from_mysql$Date),
+  expect_lt(max(as.POSIXct(dataframe_from_mysql$Date)),
             as.POSIXct("2020-01-01 01:01:01"))
-  expect_gt(min(dataframe_from_mysql$Date),
+  expect_gt(min(as.POSIXct(dataframe_from_mysql$Date)),
             as.POSIXct("1999-01-23 01:01:01"))
 
   # correctness of data(Average values)
