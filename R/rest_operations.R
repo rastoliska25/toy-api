@@ -24,7 +24,7 @@ rest_store_yearly_unemployment_data <- function() {
   yearAverages <<- yearAverages
   # TODO store data in DB, where Date is primary key and Value numeric
   library(DBI)
-  library(RMySQL)
+  library(RMariaDB)
 
   con <<- dbConnect(
     RMariaDB::MariaDB(),
@@ -60,7 +60,7 @@ rest_get_yearly_unemployment_data <- function(from, to) {
   # TODO reading data from database based on criteria of from/to
 
   library(DBI)
-  library(RMySQL)
+  library(RMariaDB)
 
   con <<- dbConnect(
     RMariaDB::MariaDB(),

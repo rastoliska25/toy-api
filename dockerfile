@@ -30,6 +30,7 @@ RUN R -e "install.packages('swagger')"
 RUN R -e "install.packages('odbc')"
 RUN R -e "install.packages('devtools')"
 RUN R -e "install.packages('RMariaDB')"
+RUN R -e "install.packages('RMySQL')"
 
 COPY / /
 
