@@ -1,0 +1,43 @@
+name: toy-api
+on: push
+jobs:
+  render:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v1
+      - name: Set up pandoc
+        uses: r-lib/actions/setup-pandoc@master
+      - name: Install dependencies
+        run: |
+          install.packages('plumber')
+          install.packages('magrittr')
+          install.packages('data.table')
+          install.packages('lubridate')
+          install.packages('logging')
+          install.packages('tryCatchLog')
+          install.packages('Quandl')
+          install.packages('DBI')
+          install.packages('dplyr')
+          install.packages('swagger')
+          install.packages('odbc')
+          install.packages('devtools')
+          install.packages('RMySQL')
+          install.packages('tempr.tar.gz', repos = NULL, type = 'source')
+          install.packages('tempr')  
+          install.packages('httptest')
+        shell: Rscript {0}
+      - name: Script
+        run: devtools::test()
+        shell: Rscript {0}
+      - name: Commit files
+        run: |
+          git config --local user.name github-actions
+          git config --local user.email "actions@github.com"
+          git add output/*
+          git commit -am "commit on $(date)"
+          git push origin main
+        env:
+          REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+          username: github-actions
