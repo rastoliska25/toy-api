@@ -28,6 +28,7 @@ jobs:
           install.packages('tempr')  
           install.packages('httptest')
           install.packages('RMariaDB')
+          install.packages('dbplyr')
         shell: Rscript {0}
       - name: Script
         run: devtools::test()
