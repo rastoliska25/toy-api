@@ -28,13 +28,23 @@ rest_store_yearly_unemployment_data <- function() {
   library(DBI)
   library(RMariaDB)
 
+  # local db (+ from docker)
+  # con <<- dbConnect(
+  #   RMariaDB::MariaDB(),
+  #   dbname = 'shop',
+  #   host = 'host.docker.internal',
+  #   port = 3306,
+  #   user = 'root',
+  #   password = 'password'
+  # )
+
   con <<- dbConnect(
     RMariaDB::MariaDB(),
     dbname = 'shop',
-    host = 'host.docker.internal',
+    host = 'toyapidb.mysql.database.azure.com',
     port = 3306,
-    user = 'root',
-    password = 'password'
+    user = 'rasto25',
+    password = 'Test12345'
   )
 
   # create table and insert data
@@ -68,10 +78,10 @@ rest_get_yearly_unemployment_data <- function(from, to) {
   con <<- dbConnect(
     RMariaDB::MariaDB(),
     dbname = 'shop',
-    host = 'host.docker.internal',
+    host = 'toyapidb.mysql.database.azure.com',
     port = 3306,
-    user = 'root',
-    password = 'password'
+    user = 'rasto25',
+    password = 'Test12345'
   )
 
   filter_date_from <- as.POSIXct(from, tz = "UTC")
