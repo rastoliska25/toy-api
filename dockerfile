@@ -29,7 +29,7 @@ RUN R -e "install.packages('dplyr')"
 RUN R -e "install.packages('swagger')"
 RUN R -e "install.packages('odbc')"
 RUN R -e "install.packages('devtools')"
-RUN R -e "install.packages('RMySQL')"
+RUN R -e "install.packages('RMariaDB')"
 
 COPY / /
 

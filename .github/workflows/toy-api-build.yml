@@ -27,6 +27,7 @@ jobs:
           install.packages('tempr.tar.gz', repos = NULL, type = 'source')
           install.packages('tempr')  
           install.packages('httptest')
+          install.packages('RMariaDB')
         shell: Rscript {0}
       - name: Script
         run: devtools::test()
