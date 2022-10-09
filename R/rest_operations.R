@@ -7,6 +7,8 @@ rest_store_yearly_unemployment_data <- function() {
   # reading data, use toyAPI::read_quandl_unemployement_data()
   read_quandl_unemployement_data()
 
+  library(dplyr)
+
   # TODO averaging by year
   res$Date <- as.Date(res$Date)   #convert to date
   res$Year <-
@@ -29,7 +31,7 @@ rest_store_yearly_unemployment_data <- function() {
   con <<- dbConnect(
     RMariaDB::MariaDB(),
     dbname = 'shop',
-    host = '127.0.0.1',
+    host = 'host.docker.internal',
     port = 3306,
     user = 'root',
     password = 'password'
@@ -59,19 +61,19 @@ rest_store_yearly_unemployment_data <- function() {
 rest_get_yearly_unemployment_data <- function(from, to) {
   # TODO reading data from database based on criteria of from/to
 
+  library(dplyr)
   library(DBI)
   library(RMariaDB)
 
   con <<- dbConnect(
     RMariaDB::MariaDB(),
     dbname = 'shop',
-    host = '127.0.0.1',
+    host = 'host.docker.internal',
     port = 3306,
     user = 'root',
     password = 'password'
   )
 
-  library(dplyr)
   filter_date_from <- as.POSIXct(from, tz = "UTC")
   filter_date_to <- as.POSIXct(to, tz = "UTC")
 

@@ -15,7 +15,6 @@
    plumber::plumb(dir = system.file("plumber", package = "toyAPI"))$run(host, port, ...)
  }
 
-
 # docker run:
 
 # run_api <- plumber::plumb("/inst/plumber/plumber.R")
