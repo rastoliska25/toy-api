@@ -26,16 +26,14 @@ rest_store_yearly_unemployment_data <- function() {
   library(DBI)
   library(RMySQL)
 
-  con <<-
-    dbConnect(
-      odbc::odbc(),
-      .connection_string = "Driver={MySQL ODBC 8.0 Unicode Driver};",
-      Server = "127.0.0.1",
-      Database = "shop",
-      UID = "root",
-      PWD = "password",
-      Port = 3306
-    )
+  con <<- dbConnect(
+    RMariaDB::MariaDB(),
+    dbname = 'shop',
+    host = '127.0.0.1',
+    port = 3306,
+    user = 'root',
+    password = 'password'
+  )
 
   # create table and insert data
   dbGetQuery(
@@ -65,7 +63,7 @@ rest_get_yearly_unemployment_data <- function(from, to) {
   library(RMySQL)
 
   con <<- dbConnect(
-    RMySQL::MySQL(),
+    RMariaDB::MariaDB(),
     dbname = 'shop',
     host = '127.0.0.1',
     port = 3306,
