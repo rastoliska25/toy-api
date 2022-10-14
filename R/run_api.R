@@ -11,12 +11,16 @@
 #' @return A running Plumber API
 #' @export
 
- run_api <- function(host = '0.0.0.0', port = 8000, ...) {
-   plumber::plumb(dir = system.file("plumber", package = "toyAPI"))$run(host, port, ...)
- }
+run_api <- function(host = '0.0.0.0', port = 8000, ...) {
+  register_api()
+  heartbeat()
+  plumber::plumb(dir = system.file("plumber", package = "toyAPI"))$run(host, port, ...)
+}
 
 # docker run:
 
+# register_api()
+# heartbeat()
 # run_api <- plumber::plumb("/inst/plumber/plumber.R")
 # run_api$run(port = 8000,
 #             host = "0.0.0.0",
