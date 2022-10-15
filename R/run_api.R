@@ -11,7 +11,7 @@
 #' @return A running Plumber API
 #' @export
 
-library('tempr')
+# library('tempr')
 
 run_api <- function(host = '0.0.0.0', port = 8000, ...) {
   register_api()

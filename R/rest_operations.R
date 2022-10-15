@@ -118,13 +118,19 @@ register_api <- function() {
       statusPageUrl = "http://127.0.0.1:8000/__docs__/",
       homePageUrl = "http://127.0.0.1:8000",
       dataCenterInfo = list(class = "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
-                            name = "MyOwn")
+                            name = "MyOwn"),
+      leaseInfo = list(
+        renewalIntervalInSecs = "8",
+        durationInSecs = "10"
+      )
     )
   )
 
-  POST("http://host.docker.internal:8761/eureka/apps/toyApi",
-       body = data,
-       encode = "json")
+  POST(
+    "http://host.docker.internal:8761/eureka/apps/toyApi",
+    body = data,
+    encode = "json"
+  )
 
 }
 
