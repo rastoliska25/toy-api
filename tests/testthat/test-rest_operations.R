@@ -8,7 +8,6 @@ test_that("Store yearly unemployment data test, success", {
 
   test_date <- T
   for (i in 1:nrow(yearAverages)) {
-
     datas <- yearAverages[i,]
     date <- datas$Date
 
@@ -24,7 +23,6 @@ test_that("Store yearly unemployment data test, success", {
   # Values to store format test
   test_value <- T
   for (i in 1:nrow(yearAverages)) {
-
     datas <- yearAverages[i, ]
     value <- datas$Value
 
@@ -41,15 +39,14 @@ test_that("Store yearly unemployment data test, success", {
 test_that("Get yearly unemplyment data test, success", {
   # TODO create test, which check whether data are loaded in required format
   dataframe_from_mysql <-
-    rest_get_yearly_unemployment_data("2000-01-23", "2019-01-23")
+    rest_get_yearly_unemployment_data("2000-01-23T00:00:00Z", "2019-01-23T00:00:00Z")
 
   #Dates to load format test
   is.right_date_format <- function(x)
-    ! is.na(as.Date(x, format = "%Y-%m-%d %H:%M:%S"))
+    ! is.na(as.Date(x, tz = "UTC", format = "%Y-%m-%dT%H:%M:%SZ"))
 
   test_date <- T
   for (i in 1:nrow(dataframe_from_mysql)) {
-
     datas <- dataframe_from_mysql[i,]
     date <- datas$Date
 
@@ -64,7 +61,6 @@ test_that("Get yearly unemplyment data test, success", {
   # Values as numeric format
   test_value <- T
   for (i in 1:nrow(dataframe_from_mysql)) {
-
     datas <- dataframe_from_mysql[i, ]
     value <- datas$Value
 

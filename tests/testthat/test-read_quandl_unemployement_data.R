@@ -8,8 +8,7 @@ test_that("Test of reading Quandl, success", {
 
   test_date <- T
   for (i in 1:nrow(res)) {
-
-    datas <- res[i,]
+    datas <- res[i, ]
     date <- datas$Date
 
     if (!(is.right_date_format(date))) {
@@ -23,8 +22,7 @@ test_that("Test of reading Quandl, success", {
   # Values format test
   test_value <- T
   for (i in 1:nrow(res)) {
-
-    datas <- res[i,]
+    datas <- res[i, ]
     value <- datas$Value
 
     if (!(length(value) > 0 & is.numeric(value))) {
@@ -42,6 +40,11 @@ httptest::without_internet({
     # TODO test of error if Quandl service is not available
 
     expect_error(read_quandl_unemployement_data())
+
+    # local_mock(
+    #    res <- data.frame(Name = c("Jon", "Bill", "Maria", "Ben", "Tina"),
+    #                      Age = c(23, 41, 32, 58, 26))
+    # )
 
   })
 })

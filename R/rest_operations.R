@@ -48,15 +48,17 @@ rest_store_yearly_unemployment_data <- function() {
   )
 
   # create table and insert data
-  dbGetQuery(
+  dbExecute(
     con,
     "CREATE TABLE IF NOT EXISTS toy_tables (Date DATETIME,Value DOUBLE,PRIMARY KEY(Date));"
   )
 
-  dbWriteTable(conn = con,
-                name = "toy_tables",
-                value = yearAverages,
-                overwrite = TRUE)
+  dbWriteTable(
+    conn = con,
+    name = "toy_tables",
+    value = yearAverages,
+    overwrite = TRUE
+  )
 
   # TODO return calculated data as response
   dbReadTable(con, "toy_tables")
@@ -84,8 +86,8 @@ rest_get_yearly_unemployment_data <- function(from, to) {
     password = 'Test12345'
   )
 
-  filter_date_from <- as.POSIXct(from, tz = "UTC")
-  filter_date_to <- as.POSIXct(to, tz = "UTC")
+  filter_date_from <- as.POSIXct(from, tz = "UTC", format = "%Y-%m-%dT%H:%M:%SZ")
+  filter_date_to <- as.POSIXct(to, tz = "UTC", format = "%Y-%m-%dT%H:%M:%SZ")
 
   filteredData <- tbl(con, "toy_tables") %>%
     filter(Date > filter_date_from) %>%
